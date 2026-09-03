@@ -58,10 +58,10 @@ h1,h2,h3,h4{font-family:var(--head);font-weight:700;line-height:.98;letter-spaci
 }
 .eyebrow::before{content:"";width:28px;height:2px;background:var(--red);display:inline-block;flex:none}
 
-.section{padding:var(--space-9) 0}
+.section{padding:168px 0}
 .section-head{max-width:760px}
-.section h2{font-size:clamp(2rem,3.6vw,3.4rem);margin:20px 0 0}
-.section .lead{font-family:var(--sub);font-weight:200;color:var(--navy);font-size:clamp(1.15rem,1.6vw,1.4rem);line-height:1.5;margin-top:22px;max-width:640px}
+.section h2{font-size:clamp(1.65rem,2.4vw,2.35rem);margin:26px 0 0}
+.section .lead{font-family:var(--sub);font-weight:200;color:rgba(8,27,60,.6);font-size:clamp(1rem,1.2vw,1.1rem);line-height:1.6;margin-top:30px;max-width:560px}
 .hero .lead,.offer-modal .lead,.process .lead,.proof .lead,.finalcta .lead{color:rgba(255,255,255,.86)}
 .section.tint{background:var(--paper-2)}
 @media(max-width:760px){.section{padding:var(--space-7) 0}}
@@ -81,47 +81,60 @@ h1,h2,h3,h4{font-family:var(--head);font-weight:700;line-height:.98;letter-spaci
 .btn-navy:hover{background:var(--navy-2)}
 .btn-lg{padding:18px 34px;font-size:16px}
 
-/* ---------- header ---------- */
+/* ---------- header: a floating white card inset from the viewport,
+   not an edge-to-edge bar -- stays solid/opaque at every scroll depth ---------- */
 header.nav{
-  position:sticky;top:0;z-index:60;background:var(--paper);
-  border-bottom:1px solid var(--line);
-  transition:background-color .4s ease,border-color .4s ease;
+  position:sticky;top:16px;z-index:60;
+  width:min(calc(100% - 48px),1280px);margin:16px auto 0;
+  background:var(--paper);border-radius:22px;
+  box-shadow:0 1px 2px rgba(4,15,34,.04),0 16px 40px rgba(4,15,34,.1);
+  transition:border-radius .3s ease;
 }
-header.nav.nav-transparent{background:transparent;border-bottom:1px solid transparent}
-header.nav.scrolled{box-shadow:0 1px 0 var(--line)}
-.nav .wrap{display:flex;align-items:center;height:88px;gap:48px}
-.nav .logo img{height:46px}
-.nav ul{list-style:none;display:flex;gap:34px;align-items:center}
-.nav ul a{font-family:var(--sub);font-size:14px;font-weight:700;letter-spacing:.02em;color:var(--navy);position:relative;padding:6px 0}
-header.nav.nav-transparent ul > li > a{color:#fff}
-.nav ul a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--red);transition:width .3s var(--ease)}
-.nav ul a:hover::after{width:100%}
-.nav ul li.has-drop{position:relative}
+.nav .wrap{display:flex;align-items:center;height:80px;gap:48px;padding:0 26px}
+.nav .logo img{height:42px}
+.nav ul{list-style:none;display:flex;gap:6px;align-items:center}
+.nav ul a{font-family:var(--sub);font-size:14px;font-weight:700;letter-spacing:.01em;color:var(--navy);
+  padding:10px 16px;border-radius:100px;transition:background-color .25s ease}
+.nav ul a:hover{background:var(--paper-2)}
 .nav ul li.has-drop>a{display:inline-flex;align-items:center;gap:6px}
 .nav ul li.has-drop>a .chev{font-size:10px;font-style:normal;transition:transform .25s ease}
-.nav ul li.has-drop:hover>a .chev{transform:rotateX(180deg)}
-.nav .drop{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:230px;
-  background:var(--paper);border:1px solid var(--line);border-radius:6px;box-shadow:0 20px 40px rgba(4,15,34,.16);
-  padding:8px;opacity:0;visibility:hidden;transition:opacity .25s ease,transform .25s ease,visibility 0s linear .25s}
-.nav ul li.has-drop:hover .drop{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);transition:opacity .25s ease,transform .25s ease}
-.nav .drop a{display:block;font-family:var(--sub);font-weight:700;font-size:13.5px;color:var(--navy);padding:11px 14px;border-radius:4px}
-.nav .drop a::after{display:none}
-.nav .drop a:hover{background:var(--paper-2);color:var(--red)}
-.nav-right{display:flex;align-items:center;gap:22px;margin-left:auto}
-/* .nav-phone is a .btn.btn-outline -- same box as the CTA beside it.
-   btn-outline defaults to a white border/text (right for the
-   transparent-over-hero state); override to navy once the header
-   goes solid so it doesn't disappear against the light background. */
-header.nav:not(.nav-transparent) .nav-phone{border-color:var(--line);color:var(--navy)}
-header.nav:not(.nav-transparent) .nav-phone:hover{border-color:var(--navy);background:var(--paper-2)}
+header.nav:has(.has-drop:hover,.nav-drop-panel:hover) .has-drop>a .chev{transform:rotate(180deg)}
+header.nav:has(.has-drop:hover,.nav-drop-panel:hover) .has-drop>a{background:var(--paper-2)}
+
+/* the dropdown doesn't float as a separate tooltip -- it's the same
+   card growing taller, flush against the nav's own bottom edge */
+header.nav:has(.has-drop:hover,.nav-drop-panel:hover){border-radius:22px 22px 0 0}
+.nav-drop-panel{position:absolute;top:100%;left:0;right:0;
+  background:var(--paper);border-radius:0 0 22px 22px;overflow:hidden;
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity .25s ease,transform .25s ease,visibility 0s linear .25s}
+header.nav:has(.has-drop:hover,.nav-drop-panel:hover) .nav-drop-panel{
+  opacity:1;visibility:visible;transform:translateY(0);transition:opacity .25s ease,transform .25s ease}
+.ndp-wrap{max-width:var(--maxw);margin:0 auto;display:flex;gap:56px;padding:8px 26px 36px}
+.ndp-grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px 28px;align-content:start}
+.ndp-grid a{font-family:var(--sub);font-weight:700;font-size:14.5px;color:var(--navy);padding:12px 4px;border-radius:8px}
+.ndp-grid a:hover{color:var(--red)}
+.ndp-feature{width:260px;flex:none;background:var(--navy);border-radius:16px;padding:26px}
+.ndp-feature .eyebrow{color:#fff}
+.ndp-feature .eyebrow::before{background:var(--red)}
+.ndp-feature p{font-family:var(--head);font-size:1.35rem;color:#fff;margin-top:14px;line-height:1.15}
+.ndp-feature .btn{margin-top:20px;width:100%;padding:12px 20px;font-size:14px}
+
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.nav-phone{font-family:var(--sub);font-weight:700;font-size:14px;color:var(--navy);
+  background:var(--paper-2);padding:12px 20px;border-radius:100px;transition:background-color .2s ease}
+.nav-phone:hover{background:var(--line)}
 .nav-toggle{display:none;flex-direction:column;gap:5px;width:26px;padding:6px 0}
 .nav-toggle span{display:block;width:100%;height:2px;background:var(--navy)}
-header.nav.nav-transparent .nav-toggle span{background:#fff}
 @media(max-width:900px){
   .nav ul{display:none}
   .nav-phone{display:none}
   .nav-right .btn{display:none}
   .nav-toggle{display:flex}
+}
+@media(max-width:760px){
+  header.nav{width:calc(100% - 24px);margin-top:10px}
+  .nav .wrap{height:70px;padding:0 18px}
 }
 
 /* ---------- mobile off-canvas menu ---------- */
@@ -142,7 +155,7 @@ header.nav.nav-transparent .nav-toggle span{background:#fff}
 .mm-cta .callnum{color:#fff;font-family:var(--sub);font-weight:700;text-align:center}
 
 /* ---------- hero ---------- */
-.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--navy-deep);margin-top:-88px}
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--navy-deep);margin-top:-96px}
 .hero-bg{position:absolute;inset:0;z-index:0}
 .hero-bg video,.hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
 .hero-bg::after{content:"";position:absolute;inset:0;
