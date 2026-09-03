@@ -49,6 +49,43 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
   menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
 })();
 
+// $49 offer modal: fires once the visitor scrolls past the hero (proof of
+// engagement) rather than on a blind timer, and only once per session
+(function () {
+  const backdrop = document.getElementById('offer-backdrop');
+  const modal = document.getElementById('offer-modal');
+  const closeBtn = document.getElementById('offer-close');
+  const rejectBtn = document.getElementById('offer-reject');
+  const claimBtn = document.getElementById('offer-claim');
+  const heroEl = document.querySelector('.hero');
+  if (!backdrop || !modal || !heroEl) return;
+  if (sessionStorage.getItem('offerSeen')) return;
+
+  const open = () => {
+    if (sessionStorage.getItem('offerSeen')) return;
+    sessionStorage.setItem('offerSeen', '1');
+    backdrop.classList.add('open');
+    modal.classList.add('open');
+    document.body.classList.add('mm-open');
+  };
+  const close = () => {
+    backdrop.classList.remove('open');
+    modal.classList.remove('open');
+    document.body.classList.remove('mm-open');
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (!e.isIntersecting) open(); });
+  }, { threshold: 0 });
+  io.observe(heroEl);
+
+  closeBtn && closeBtn.addEventListener('click', close);
+  rejectBtn && rejectBtn.addEventListener('click', close);
+  claimBtn && claimBtn.addEventListener('click', close);
+  backdrop.addEventListener('click', close);
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+})();
+
 // contact form: submit via fetch so a successful send shows an inline
 // message instead of navigating away to Formspree's own confirmation page
 (function () {

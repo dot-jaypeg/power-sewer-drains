@@ -40,6 +40,7 @@ body{
   color:var(--ink);background:var(--paper);line-height:1.6;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
+body.mm-open{overflow:hidden}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
@@ -47,9 +48,9 @@ h1,h2,h3,h4{font-family:var(--head);font-weight:700;line-height:.98;letter-spaci
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
 
 /* on dark sections, headings + eyebrows flip to light */
-.hero h1,.hero h2,.promo h2,.process h2,.proof h2,.finalcta h2,
-.hero .eyebrow,.promo .eyebrow,.process .eyebrow,.proof .eyebrow,.finalcta .eyebrow{color:#fff}
-.hero .eyebrow::before,.promo .eyebrow::before,.process .eyebrow::before,.proof .eyebrow::before,.finalcta .eyebrow::before{background:var(--red)}
+.hero h1,.hero h2,.offer-modal h2,.process h2,.proof h2,.finalcta h2,
+.hero .eyebrow,.offer-modal .eyebrow,.process .eyebrow,.proof .eyebrow,.finalcta .eyebrow{color:#fff}
+.hero .eyebrow::before,.offer-modal .eyebrow::before,.process .eyebrow::before,.proof .eyebrow::before,.finalcta .eyebrow::before{background:var(--red)}
 
 .eyebrow{
   font-family:var(--sub);font-weight:400;font-size:12.5px;letter-spacing:.22em;
@@ -61,7 +62,7 @@ h1,h2,h3,h4{font-family:var(--head);font-weight:700;line-height:.98;letter-spaci
 .section-head{max-width:760px}
 .section h2{font-size:clamp(2rem,3.6vw,3.4rem);margin:20px 0 0}
 .section .lead{font-family:var(--sub);font-weight:200;color:var(--navy);font-size:clamp(1.15rem,1.6vw,1.4rem);line-height:1.5;margin-top:22px;max-width:640px}
-.hero .lead,.promo .lead,.process .lead,.proof .lead,.finalcta .lead{color:rgba(255,255,255,.86)}
+.hero .lead,.offer-modal .lead,.process .lead,.proof .lead,.finalcta .lead{color:rgba(255,255,255,.86)}
 .section.tint{background:var(--paper-2)}
 @media(max-width:760px){.section{padding:var(--space-7) 0}}
 
@@ -152,11 +153,24 @@ header.nav.nav-transparent .nav-toggle span{background:#fff}
 .hero-trust{margin-top:26px;font-family:var(--sub);font-size:13.5px;color:rgba(255,255,255,.68);letter-spacing:.03em}
 @media(max-width:600px){.hero .wrap{padding-top:120px}}
 
-/* ---------- promo statement ---------- */
-.promo{background:var(--navy)}
-.promo .section-head{max-width:980px}
-.promo h2{font-size:clamp(2rem,4.5vw,3.9rem)}
-.promo-actions{margin-top:38px}
+/* ---------- offer modal ---------- */
+.offer-backdrop{position:fixed;inset:0;background:rgba(4,15,34,.7);z-index:90;
+  opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s}
+.offer-backdrop.open{opacity:1;visibility:visible;transition:opacity .35s ease}
+.offer-modal{position:fixed;left:50%;top:50%;z-index:91;width:min(92vw,560px);
+  background:var(--navy);border-radius:10px;padding:var(--space-6) var(--space-5);
+  box-shadow:0 40px 90px rgba(4,15,34,.5);
+  opacity:0;visibility:hidden;transform:translate(-50%,-46%);
+  transition:opacity .35s var(--ease),transform .35s var(--ease),visibility 0s linear .35s}
+.offer-modal.open{opacity:1;visibility:visible;transform:translate(-50%,-50%);transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.offer-modal h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-top:18px}
+.offer-modal .lead{font-size:16px;margin-top:18px;max-width:none}
+.offer-actions{margin-top:32px;display:flex;flex-wrap:wrap;align-items:center;gap:22px}
+.offer-close{position:absolute;top:20px;right:20px;color:rgba(255,255,255,.6);font-size:18px;line-height:1;padding:6px}
+.offer-close:hover{color:#fff}
+.btn-text-light{font-family:var(--sub);font-weight:700;font-size:14.5px;color:rgba(255,255,255,.7);text-decoration:underline;text-decoration-color:transparent;transition:color .2s ease,text-decoration-color .2s ease}
+.btn-text-light:hover{color:#fff;text-decoration-color:currentColor}
+@media(max-width:600px){.offer-modal{padding:var(--space-5) var(--space-4)}}
 
 /* ---------- services index ---------- */
 .services-list{margin-top:var(--space-6);border-top:1px solid var(--line)}

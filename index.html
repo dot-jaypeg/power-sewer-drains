@@ -90,18 +90,6 @@
   </div>
 </section>
 
-<section class="promo section">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">The Offer</span>
-      <h2>$49 to unclog a drain.<br>If we can't, you don't pay.</h2>
-      <p class="lead">Free visual estimates on every job, upfront pricing before we start, and no charge if we can't clear it. That's the whole offer &mdash; no fine print.</p>
-    </div>
-    <div class="promo-actions reveal">
-      <a class="btn btn-primary btn-lg" href="#contact">Claim the $49 Offer &rarr;</a>
-    </div>
-  </div>
-</section>
 
 <section class="section" id="services">
   <div class="wrap">
@@ -255,6 +243,18 @@
 <div class="mobile-callbar">
   <a class="call" href="tel:+17473705601">Call Now</a>
   <a class="book" href="#contact">Get Estimate</a>
+</div>
+
+<div class="offer-backdrop" id="offer-backdrop"></div>
+<div class="offer-modal" id="offer-modal" role="dialog" aria-modal="true" aria-labelledby="offer-title">
+  <button class="offer-close" id="offer-close" aria-label="Close">&#10005;</button>
+  <span class="eyebrow">The Offer</span>
+  <h2 id="offer-title">$49 to unclog a drain.<br>If we can't, you don't pay.</h2>
+  <p class="lead">Free visual estimates on every job, upfront pricing before we start, and no charge if we can't clear it. That's the whole offer &mdash; no fine print.</p>
+  <div class="offer-actions">
+    <a class="btn btn-primary btn-lg" href="#contact" id="offer-claim">Claim the $49 Offer &rarr;</a>
+    <button class="btn-text-light" id="offer-reject">No thanks</button>
+  </div>
 </div>
 
 <script src="app.js" defer></script>
