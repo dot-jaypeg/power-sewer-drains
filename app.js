@@ -1,3 +1,14 @@
+// buttery inertia scroll (matches the site's motion reference) -- degrades
+// straight to native scrolling if the CDN script didn't load for any reason
+const lenis = window.Lenis ? new Lenis({
+  autoRaf: true,
+  autoToggle: true,
+  anchors: true,
+  allowNestedScroll: true,
+  naiveDimensions: true,
+  stopInertiaOnNavigate: true,
+}) : null;
+
 // sticky header: crossfade from transparent-over-hero to solid once scrolled past it
 const nav = document.getElementById('nav');
 if (nav) {
@@ -24,10 +35,68 @@ revealEls.forEach(el => {
 groups.forEach(list => {
   list.forEach((el, i) => el.style.setProperty('--d', Math.min(i * 0.06, 0.24) + 's'));
 });
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => e.target.classList.toggle('in', e.isIntersecting));
+const io = new IntersectionObserver((entries, obs) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('in');
+    obs.unobserve(e.target);
+  });
 }, { threshold: .12 });
 revealEls.forEach(el => io.observe(el));
+
+// heading word-reveal: wraps each word in a clipped mask so it rises into
+// place, one section-heading at a time -- section h2s trigger on scroll in
+// (once), the hero h1 triggers shortly after load since it's already on screen
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const wrapWords = (root) => {
+    const walk = (node) => {
+      Array.from(node.childNodes).forEach((child) => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const frag = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach((tok) => {
+            if (tok.trim() === '') { frag.appendChild(document.createTextNode(tok)); return; }
+            const mask = document.createElement('span');
+            mask.className = 'word-mask';
+            const word = document.createElement('span');
+            word.className = 'word';
+            word.textContent = tok;
+            mask.appendChild(word);
+            frag.appendChild(mask);
+          });
+          child.replaceWith(frag);
+        } else if (child.nodeType === Node.ELEMENT_NODE && child.tagName !== 'BR') {
+          walk(child);
+        }
+      });
+    };
+    walk(root);
+    return Array.from(root.querySelectorAll('.word'));
+  };
+
+  const stagger = (words, base = 0) => {
+    words.forEach((w, i) => { w.style.transitionDelay = (base + i * 0.035) + 's'; });
+  };
+
+  const heroH1 = document.querySelector('.hero h1');
+  if (heroH1) {
+    const words = wrapWords(heroH1);
+    stagger(words, 0.15);
+    requestAnimationFrame(() => requestAnimationFrame(() => heroH1.classList.add('words-in')));
+  }
+
+  const headIo = new IntersectionObserver((entries, obs) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const words = wrapWords(e.target);
+      stagger(words);
+      requestAnimationFrame(() => requestAnimationFrame(() => e.target.classList.add('words-in')));
+      obs.unobserve(e.target);
+    });
+  }, { threshold: .3 });
+  document.querySelectorAll('.section h2').forEach((h) => headIo.observe(h));
+})();
 
 // don't force autoplay on background videos for users who asked for reduced motion
 if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -41,8 +110,8 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const backdrop = document.querySelector('.mm-backdrop');
   const closeBtn = document.querySelector('.mm-close');
   if (!toggle || !menu) return;
-  const open = () => { menu.classList.add('open'); backdrop && backdrop.classList.add('open'); document.body.classList.add('mm-open'); };
-  const close = () => { menu.classList.remove('open'); backdrop && backdrop.classList.remove('open'); document.body.classList.remove('mm-open'); };
+  const open = () => { menu.classList.add('open'); backdrop && backdrop.classList.add('open'); document.body.classList.add('mm-open'); lenis && lenis.stop(); };
+  const close = () => { menu.classList.remove('open'); backdrop && backdrop.classList.remove('open'); document.body.classList.remove('mm-open'); lenis && lenis.start(); };
   toggle.addEventListener('click', open);
   closeBtn && closeBtn.addEventListener('click', close);
   backdrop && backdrop.addEventListener('click', close);
@@ -67,11 +136,13 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     backdrop.classList.add('open');
     modal.classList.add('open');
     document.body.classList.add('mm-open');
+    lenis && lenis.stop();
   };
   const close = () => {
     backdrop.classList.remove('open');
     modal.classList.remove('open');
     document.body.classList.remove('mm-open');
+    lenis && lenis.start();
   };
 
   const io = new IntersectionObserver((entries) => {
