@@ -156,9 +156,9 @@ header.nav.nav-transparent .nav-toggle span{background:#fff}
 .hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:38px}
 /* ---------- announcement bar ---------- */
 .announce-bar{background:var(--navy);color:rgba(255,255,255,.82);
-  font-family:var(--sub);font-weight:700;font-size:12.5px;letter-spacing:.04em;text-align:center;
+  font-family:var(--sub);font-weight:200;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;text-align:center;
   padding:10px 16px}
-@media(max-width:600px){.announce-bar{font-size:11px;padding:9px 12px}}
+@media(max-width:600px){.announce-bar{font-size:10.5px;letter-spacing:.14em;padding:9px 12px}}
 @media(max-width:600px){.hero .wrap{padding-top:120px}}
 
 /* ---------- offer modal ---------- */
@@ -193,6 +193,7 @@ header.nav.nav-transparent .nav-toggle span{background:#fff}
 .pricing-strip{margin-top:var(--space-6);display:flex;flex-wrap:wrap;justify-content:center;text-align:center;gap:12px 34px;font-family:var(--sub);font-size:15px;color:var(--navy)}
 .pricing-strip b{font-family:var(--head);color:var(--red);font-weight:700;margin-right:8px}
 .pricing-strip .eyebrow{width:100%;justify-content:center;margin-bottom:6px}
+.pricing-strip .eyebrow::after{content:"";width:28px;height:2px;background:var(--red);display:inline-block;flex:none}
 
 /* ---------- process split ---------- */
 .process{background:var(--navy-2)}
@@ -246,17 +247,17 @@ header.nav.nav-transparent .nav-toggle span{background:#fff}
 @media(max-width:860px){.finalcta .wrap{grid-template-columns:1fr}.fc-card .row{flex-direction:column}}
 
 /* ---------- footer ---------- */
-footer{background:var(--paper-2);border-top:1px solid var(--line)}
+footer{background:var(--navy);border-top:1px solid var(--line-on-navy)}
 .foot-grid{padding:var(--space-8) 0 var(--space-6);display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:var(--space-6)}
 .foot-brand img{height:44px}
-.foot-brand p{font-family:var(--sub);font-size:14px;color:var(--gray);margin-top:16px;max-width:320px;line-height:1.6}
-.foot-tag{font-family:var(--sub);font-weight:200;font-style:italic;color:var(--navy);font-size:15px;margin-top:14px}
-.foot-col h4{font-family:var(--sub);font-weight:700;font-size:14px;color:var(--navy);letter-spacing:.04em;margin-bottom:16px}
+.foot-brand p{font-family:var(--sub);font-size:14px;color:rgba(255,255,255,.62);margin-top:16px;max-width:320px;line-height:1.6}
+.foot-tag{font-family:var(--sub);font-weight:200;font-style:italic;color:var(--paper);font-size:15px;margin-top:14px}
+.foot-col h4{font-family:var(--sub);font-weight:700;font-size:14px;color:var(--paper);letter-spacing:.04em;margin-bottom:16px}
 .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
-.foot-col a,.foot-col span{font-family:var(--sub);font-size:14.5px;color:var(--gray)}
-.foot-col a:hover{color:var(--navy)}
-.foot-bottom{border-top:1px solid var(--line);padding:22px 0 calc(22px + env(safe-area-inset-bottom));
-  display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-family:var(--sub);font-size:12.5px;color:var(--gray)}
+.foot-col a,.foot-col span{font-family:var(--sub);font-size:14.5px;color:rgba(255,255,255,.62)}
+.foot-col a:hover{color:var(--paper)}
+.foot-bottom{border-top:1px solid var(--line-on-navy);padding:22px 0 calc(22px + env(safe-area-inset-bottom));
+  display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-family:var(--sub);font-size:12.5px;color:rgba(255,255,255,.5)}
 @media(max-width:760px){.foot-grid{grid-template-columns:1fr;gap:var(--space-5)}}
 
 /* ---------- mobile sticky call bar ---------- */
