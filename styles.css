@@ -92,9 +92,20 @@ header.nav.scrolled{box-shadow:0 1px 0 var(--line)}
 .nav .logo img{height:46px}
 .nav ul{list-style:none;display:flex;gap:34px;align-items:center}
 .nav ul a{font-family:var(--sub);font-size:14px;font-weight:700;letter-spacing:.02em;color:var(--navy);position:relative;padding:6px 0}
-header.nav.nav-transparent ul a{color:#fff}
+header.nav.nav-transparent ul > li > a{color:#fff}
 .nav ul a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--red);transition:width .3s var(--ease)}
 .nav ul a:hover::after{width:100%}
+.nav ul li.has-drop{position:relative}
+.nav ul li.has-drop>a{display:inline-flex;align-items:center;gap:6px}
+.nav ul li.has-drop>a .chev{font-size:10px;font-style:normal;transition:transform .25s ease}
+.nav ul li.has-drop:hover>a .chev{transform:rotateX(180deg)}
+.nav .drop{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:230px;
+  background:var(--paper);border:1px solid var(--line);border-radius:6px;box-shadow:0 20px 40px rgba(4,15,34,.16);
+  padding:8px;opacity:0;visibility:hidden;transition:opacity .25s ease,transform .25s ease,visibility 0s linear .25s}
+.nav ul li.has-drop:hover .drop{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);transition:opacity .25s ease,transform .25s ease}
+.nav .drop a{display:block;font-family:var(--sub);font-weight:700;font-size:13.5px;color:var(--navy);padding:11px 14px;border-radius:4px}
+.nav .drop a::after{display:none}
+.nav .drop a:hover{background:var(--paper-2);color:var(--red)}
 .nav-right{display:flex;align-items:center;gap:22px}
 .nav-phone{font-family:var(--sub);font-weight:700;font-size:14.5px;color:var(--navy)}
 header.nav.nav-transparent .nav-phone{color:#fff}
@@ -112,14 +123,17 @@ header.nav.nav-transparent .nav-toggle span{background:#fff}
 .mm-backdrop{position:fixed;inset:0;background:rgba(4,15,34,.6);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s;z-index:70}
 .mm-backdrop.open{opacity:1;visibility:visible;transition:opacity .3s ease}
 .mobile-menu{position:fixed;top:0;right:0;bottom:0;width:min(84vw,360px);background:var(--navy);z-index:80;
-  transform:translateX(100%);transition:transform .4s var(--ease);display:flex;flex-direction:column;padding:28px 26px}
+  transform:translateX(100%);transition:transform .4s var(--ease);display:flex;flex-direction:column;padding:28px 26px;overflow-y:auto}
 .mobile-menu.open{transform:translateX(0)}
-.mm-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px}
+.mm-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px;flex:none}
 .mm-head img{height:34px}
 .mm-close{color:#fff;font-size:22px}
 .mobile-menu nav{display:flex;flex-direction:column;gap:6px}
 .mobile-menu nav a{color:#fff;font-family:var(--head);font-size:26px;padding:12px 0;border-bottom:1px solid var(--line-on-navy)}
-.mm-cta{margin-top:auto;display:flex;flex-direction:column;gap:14px}
+.mobile-menu nav .sub{display:flex;flex-direction:column;padding:2px 0 10px 18px}
+.mobile-menu nav .sub a{font-family:var(--sub);font-weight:700;font-size:15px;color:rgba(255,255,255,.7);padding:10px 0;border-bottom:0}
+.mobile-menu nav .sub a:hover{color:#fff}
+.mm-cta{margin-top:auto;padding-top:20px;flex:none;display:flex;flex-direction:column;gap:14px}
 .mm-cta .callnum{color:#fff;font-family:var(--sub);font-weight:700;text-align:center}
 
 /* ---------- hero ---------- */
@@ -147,7 +161,7 @@ header.nav.nav-transparent .nav-toggle span{background:#fff}
 /* ---------- services index ---------- */
 .services-list{margin-top:var(--space-6);border-top:1px solid var(--line)}
 .svc-row{display:flex;align-items:baseline;gap:28px;padding:26px 0;border-bottom:1px solid var(--line);
-  transition:padding-left .3s var(--ease);cursor:default}
+  scroll-margin-top:108px;transition:padding-left .3s var(--ease);cursor:default}
 .svc-row:hover{padding-left:14px}
 .svc-num{font-family:var(--head);font-size:15px;color:var(--gray);flex:none;width:34px}
 .svc-name{font-family:var(--head);font-size:clamp(1.3rem,2.4vw,2rem);flex:1;color:var(--navy)}
