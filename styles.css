@@ -58,13 +58,13 @@ h1,h2,h3,h4{font-family:var(--head);font-weight:700;line-height:.98;letter-spaci
 }
 .eyebrow::before{content:"";width:28px;height:2px;background:var(--red);display:inline-block;flex:none}
 
-.section{padding:168px 0}
+.section{padding:168px 0;scroll-margin-top:112px}
 .section-head{max-width:760px}
-.section h2{font-size:clamp(1.65rem,2.4vw,2.35rem);margin:26px 0 0}
+.section h2{font-size:clamp(1.65rem,2.4vw,2.35rem);margin:26px 0 0;scroll-margin-top:112px}
 .section .lead{font-family:var(--sub);font-weight:200;color:rgba(8,27,60,.6);font-size:clamp(1rem,1.2vw,1.1rem);line-height:1.6;margin-top:30px;max-width:560px}
 .hero .lead,.offer-modal .lead,.process .lead,.proof .lead,.finalcta .lead{color:rgba(255,255,255,.86)}
 .section.tint{background:var(--paper-2)}
-@media(max-width:760px){.section{padding:var(--space-7) 0}}
+@media(max-width:760px){.section{padding:var(--space-7) 0}.section h2{scroll-margin-top:92px}}
 
 /* ---------- buttons ---------- */
 .btn{
@@ -293,7 +293,12 @@ footer{background:var(--navy);border-top:1px solid var(--line-on-navy)}
 .reveal.in .eyebrow::before,.reveal.in .eyebrow::after,body.loaded .hero .eyebrow::before{transform:scaleX(1)}
 
 /* word-mask heading reveal: each word rises up from behind a clipped mask */
-.word-mask{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+/* the headline face is oblique -- its ink leans right as it rises, so the
+   mask needs right-side room too or ascenders clip at the box's edge
+   (e.g. a trailing "f") on top of the usual vertical descender room */
+.word-mask{display:inline-block;overflow:hidden;vertical-align:top;
+  padding-top:.16em;margin-top:-.16em;padding-bottom:.1em;margin-bottom:-.1em;
+  padding-right:.22em;margin-right:-.22em}
 .word{display:inline-block;transform:translateY(115%);transition:transform 1s cubic-bezier(.19,1,.22,1)}
 .words-in .word{transform:translateY(0)}
 
