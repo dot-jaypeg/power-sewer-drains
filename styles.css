@@ -88,8 +88,19 @@ header.nav{
   width:min(calc(100% - 48px),1280px);margin:16px auto 0;
   background:var(--paper);border-radius:22px;
   box-shadow:0 1px 2px rgba(4,15,34,.04),0 16px 40px rgba(4,15,34,.1);
-  transition:border-radius .3s ease;
+  transition:border-radius .3s ease,background-color .35s ease,box-shadow .35s ease;
 }
+/* over the hero, the card disappears entirely -- transparent shell, white
+   text -- until the visitor scrolls past it, or opens the dropdown (which
+   always forces the solid card regardless of scroll position) */
+header.nav.nav-transparent{background:transparent;box-shadow:none}
+header.nav.nav-transparent ul>li>a{color:#fff}
+header.nav.nav-transparent ul>li>a:hover{background:rgba(255,255,255,.16)}
+header.nav.nav-transparent .nav-toggle span{background:#fff}
+header.nav.nav-transparent:has(.has-drop:hover,.nav-drop-panel:hover){
+  background:var(--paper);box-shadow:0 1px 2px rgba(4,15,34,.04),0 16px 40px rgba(4,15,34,.1)}
+header.nav.nav-transparent:has(.has-drop:hover,.nav-drop-panel:hover) ul>li>a{color:var(--navy)}
+header.nav.nav-transparent:has(.has-drop:hover,.nav-drop-panel:hover) ul>li>a:hover{background:var(--paper-2)}
 .nav .wrap{display:flex;align-items:center;height:80px;gap:48px;padding:0 26px}
 .nav .logo img{height:42px}
 .nav ul{list-style:none;display:flex;gap:6px;align-items:center}
