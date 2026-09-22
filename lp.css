@@ -21,10 +21,11 @@
 }
 @media(max-width:420px){.lp .nav-phone .num{display:none}.lp .nav-phone::after{content:"Call"}}
 
-@media(max-width:600px){.lp .announce-bar .ab-lic{display:none}}
-
 /* ---------- hero: copy left, lead form right ---------- */
 .lp-hero{position:relative;overflow:hidden;background:var(--navy-deep);margin-top:-96px}
+/* tuck under the header card only: 16px margin + 80px card on desktop,
+   10px + 70px on phones -- a larger overlap covers the announcement bar */
+@media(max-width:760px){.lp-hero{margin-top:-80px}}
 .lp-hero .hero-bg{position:absolute;inset:0;z-index:0}
 .lp-hero .hero-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
 .lp-hero .hero-bg::after{content:"";position:absolute;inset:0;
@@ -45,7 +46,14 @@
 .lp-stats div b{display:block;font-family:var(--head);font-size:clamp(1.5rem,2.4vw,2rem);color:#fff;line-height:1}
 .lp-stats div span{font-family:var(--sub);font-size:13px;color:rgba(255,255,255,.62)}
 @media(max-width:960px){
-  .lp-hero .wrap{grid-template-columns:1fr;gap:var(--space-6);padding-top:150px;padding-bottom:var(--space-7)}
+  .lp-hero .wrap{grid-template-columns:minmax(0,1fr);gap:var(--space-6);padding-top:150px;padding-bottom:var(--space-7)}
+}
+/* smallest phones (320-360px): keep the banner on one line and let the
+   oblique headline shrink enough that no word forces sideways scroll */
+@media(max-width:360px){
+  .lp .announce-bar{font-size:9.5px;letter-spacing:.08em;white-space:nowrap;padding:9px 8px}
+  .lp-hero h1{font-size:1.8rem}
+  .lp .wrap{padding:0 20px}
 }
 @media(max-width:600px){
   .lp-hero .wrap{padding-top:120px}

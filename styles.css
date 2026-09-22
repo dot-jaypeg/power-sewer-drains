@@ -183,6 +183,7 @@ header.nav:has(.has-drop:hover,.nav-drop-panel:hover) .nav-drop-panel{
   font-family:var(--sub);font-weight:300;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;text-align:center;
   padding:10px 16px}
 @media(max-width:600px){.announce-bar{font-size:10.5px;letter-spacing:.14em;padding:9px 12px}}
+@media(max-width:760px){.hero{margin-top:-80px}}
 @media(max-width:600px){.hero .wrap{padding-top:120px}}
 
 /* ---------- offer modal ---------- */
