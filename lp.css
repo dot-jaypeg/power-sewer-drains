@@ -117,7 +117,7 @@
 .lp-prices span{font-family:var(--sub);font-size:16px;color:rgba(255,255,255,.85)}
 .lp-prices small{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:2px}
 .lp-prices b{font-family:var(--head);font-size:clamp(1.6rem,2.6vw,2.2rem);color:#fff;flex:none}
-@media(max-width:860px){.lp-offer .wrap{grid-template-columns:1fr}}
+@media(max-width:860px){.lp-offer .wrap{grid-template-columns:minmax(0,1fr)}}
 
 /* ---------- why choose ---------- */
 .lp-why{margin-top:var(--space-6);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6) var(--space-5)}
@@ -133,6 +133,13 @@
 .lp-cities span{font-family:var(--sub);font-weight:700;font-size:14.5px;color:var(--navy);background:var(--paper);
   border:1px solid var(--line);border-radius:100px;padding:10px 18px}
 .lp-cities span.home{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* service area grouped by county */
+.lp-counties{margin-top:var(--space-6);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-5)}
+.lp-county{border-top:2px solid var(--navy);padding-top:20px}
+.lp-county h3{font-size:1.2rem}
+.lp-county .lp-cities{margin-top:16px}
+@media(max-width:900px){.lp-counties{grid-template-columns:1fr}}
 
 /* ---------- more services ---------- */
 .lp-more{margin-top:var(--space-5);border-top:1px solid var(--line)}
@@ -163,7 +170,8 @@
 .lp-final .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--space-7);align-items:start}
 .lp-final h2,.lp-final .eyebrow{color:#fff}
 .lp-final .lead{color:rgba(255,255,255,.8)}
-@media(max-width:860px){.lp-final .wrap{grid-template-columns:1fr}}
+@media(max-width:860px){.lp-final .wrap,.lp .process .wrap{grid-template-columns:minmax(0,1fr)}}
+.lp .fc-row a,.lp .fc-row span{overflow-wrap:anywhere}
 
 @media(prefers-reduced-motion:reduce){.lp-trust .track{animation:none}}
 

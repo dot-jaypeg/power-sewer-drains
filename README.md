@@ -9,7 +9,7 @@ Homepage built: pure HTML/CSS/JS, no build step. Google Ads landing pages built 
 ## Structure
 
 - `index.html` / `styles.css` / `app.js` — the homepage
-- `ga-plumbing-services/`, `ga-drain-cleaning/`, `ga-sewer-repair/` — paid-traffic landing pages (noindex): stripped header, hero lead form, mobile sticky call bar. Share `lp.css` (on top of `styles.css`) and `lp.js` (on top of `app.js`); `lp.js` copies `gclid`/`utm_*` into the forms' hidden fields
+- `plumbing-services/`, `leak-detection/`, `pipe-leaks/`, `water-heaters/` — paid-traffic landing pages (noindex): stripped header, hero lead form, mobile sticky call bar. Share `lp.css` (on top of `styles.css`) and `lp.js` (on top of `app.js`); `lp.js` copies `gclid`/`utm_*` into the forms' hidden fields
 - `assets/logos/` — primary logo (SVG/PNG/PDF/EPS/DXF)
 - `assets/fonts/` — Gravity and HelveticaNeue BoldExtObl families, self-hosted via `@font-face`
 - `assets/content/video/` — raw client-provided video; `assets/content/video/web/` has the trimmed, web-encoded clips actually used on the page
