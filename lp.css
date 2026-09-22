@@ -10,8 +10,11 @@
 .lp .nav .wrap{gap:24px}
 .lp .nav-hours{white-space:nowrap;font-family:var(--sub);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(8,27,60,.78)}
 .lp header.nav.nav-transparent .nav-hours{color:rgba(255,255,255,.88)}
-.lp .nav .logo img{width:auto;height:42px}
-@media(max-width:760px){.lp .nav .logo img{height:36px}}
+/* the shared Primary Logo.svg has a lot of empty canvas above and below the
+   mark; a ~3.2:1 box with object-fit:cover crops to the mark itself without
+   distorting it, so the LPs reuse the brand file instead of a cropped copy */
+.lp .nav .logo img{width:134px;height:42px;object-fit:cover;object-position:center 48%}
+@media(max-width:760px){.lp .nav .logo img{width:115px;height:36px}}
 .lp .nav-phone{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
 .lp .nav-phone svg{width:15px;height:15px;flex:none}
 @media(max-width:1180px){.lp .nav-hours{display:none}}
