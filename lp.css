@@ -8,8 +8,10 @@
 
 /* ---------- stripped header: logo + phone + CTA, no nav menu ---------- */
 .lp .nav .wrap{gap:24px}
-.lp .nav-hours{white-space:nowrap;font-family:var(--sub);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray)}
-.lp header.nav.nav-transparent .nav-hours{color:rgba(255,255,255,.7)}
+.lp .nav-hours{white-space:nowrap;font-family:var(--sub);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(8,27,60,.78)}
+.lp header.nav.nav-transparent .nav-hours{color:rgba(255,255,255,.88)}
+.lp .nav .logo img{width:auto;height:42px}
+@media(max-width:760px){.lp .nav .logo img{height:36px}}
 .lp .nav-phone{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
 .lp .nav-phone svg{width:15px;height:15px;flex:none}
 @media(max-width:1180px){.lp .nav-hours{display:none}}
@@ -139,3 +141,18 @@
 @media(max-width:860px){.lp-final .wrap{grid-template-columns:1fr}}
 
 @media(prefers-reduced-motion:reduce){.lp-trust .track{animation:none}}
+
+/* ---------- readability: styles.css sets .lead in Gravity UltraLight (200)
+   at 60% opacity -- too faint for paid traffic on phones in daylight, so the
+   LPs use the Book weight and stronger contrast for all supporting copy ---------- */
+.lp .lead,.lp-hero .lead{font-weight:400}
+.lp .section .lead{color:rgba(8,27,60,.8)}
+.lp .process .lead,.lp .proof .lead,.lp-offer .lead,.lp-final .lead,.lp-hero .lead{color:rgba(255,255,255,.9)}
+.lp-problem p,.lp-why p{color:rgba(8,27,60,.8)}
+.lp .process-list li{color:rgba(255,255,255,.92)}
+.lp-stats div span{color:rgba(255,255,255,.8)}
+.lp-prices small{color:rgba(255,255,255,.7)}
+.lp .fc-row span,.lp .fc-row a{color:rgba(255,255,255,.88)}
+.lead-card .lc-sub,.lead-card .lc-fine{color:#5d6677}
+.lp .foot-bottom{color:rgba(255,255,255,.72)}
+.lp .announce-bar{color:rgba(255,255,255,.9);font-weight:400}
