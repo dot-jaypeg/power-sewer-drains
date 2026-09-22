@@ -1,0 +1,141 @@
+/* ============================================================
+   PRO SEWER AND DRAINS — Paid-traffic landing pages (ga-*)
+   Loads on top of styles.css: same tokens, type, buttons, footer
+   and mobile call bar -- this file only adds the LP-specific
+   pieces (stripped header, hero + form split, trust strip,
+   problem cards, offer band, why grid, service area, more services).
+   ============================================================ */
+
+/* ---------- stripped header: logo + phone + CTA, no nav menu ---------- */
+.lp .nav .wrap{gap:24px}
+.lp .nav-hours{white-space:nowrap;font-family:var(--sub);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray)}
+.lp header.nav.nav-transparent .nav-hours{color:rgba(255,255,255,.7)}
+.lp .nav-phone{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.lp .nav-phone svg{width:15px;height:15px;flex:none}
+@media(max-width:1180px){.lp .nav-hours{display:none}}
+@media(max-width:900px){
+  .lp .nav-phone{display:inline-flex;padding:11px 16px}
+  .lp .nav-right .btn{display:none}
+}
+@media(max-width:420px){.lp .nav-phone .num{display:none}.lp .nav-phone::after{content:"Call"}}
+
+@media(max-width:600px){.lp .announce-bar .ab-lic{display:none}}
+
+/* ---------- hero: copy left, lead form right ---------- */
+.lp-hero{position:relative;overflow:hidden;background:var(--navy-deep);margin-top:-96px}
+.lp-hero .hero-bg{position:absolute;inset:0;z-index:0}
+.lp-hero .hero-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.lp-hero .hero-bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(4,15,34,.94) 0%,rgba(4,15,34,.82) 50%,rgba(4,15,34,.6) 100%)}
+.lp-hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:var(--space-7);
+  align-items:center;padding-top:190px;padding-bottom:var(--space-8)}
+.lp-hero h1{font-size:clamp(2.1rem,4.6vw,4.1rem);color:#fff;margin-top:22px}
+.lp-hero h1 em{font-style:normal;color:var(--red)}
+.lp-hero .eyebrow{color:#fff}
+.lp-hero .lead{font-family:var(--sub);font-weight:200;color:rgba(255,255,255,.86);font-size:clamp(1rem,1.25vw,1.15rem);margin-top:24px;max-width:560px}
+.lp-checks{list-style:none;display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px}
+.lp-checks li{font-family:var(--sub);font-weight:700;font-size:14px;color:#fff;display:inline-flex;align-items:center;gap:8px}
+.lp-checks li::before{content:"";width:16px;height:16px;flex:none;border-radius:50%;
+  background:var(--red) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+.lp-hero .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.lp-stats{display:flex;flex-wrap:wrap;gap:var(--space-5);margin-top:var(--space-6);padding-top:var(--space-4);border-top:1px solid var(--line-on-navy)}
+.lp-stats div b{display:block;font-family:var(--head);font-size:clamp(1.5rem,2.4vw,2rem);color:#fff;line-height:1}
+.lp-stats div span{font-family:var(--sub);font-size:13px;color:rgba(255,255,255,.62)}
+@media(max-width:960px){
+  .lp-hero .wrap{grid-template-columns:1fr;gap:var(--space-6);padding-top:150px;padding-bottom:var(--space-7)}
+}
+@media(max-width:600px){
+  .lp-hero .wrap{padding-top:120px}
+  .lp-hero .hero-actions .btn{flex:1 1 100%}
+  .lp-stats{gap:var(--space-4)}
+}
+
+/* ---------- lead form card (hero + final CTA share it) ---------- */
+.lead-card{background:var(--paper);border-radius:10px;padding:var(--space-5);box-shadow:0 40px 90px rgba(4,15,34,.45);scroll-margin-top:112px}
+.lead-card h2,.lead-card h3{font-size:1.55rem;color:var(--navy);margin:0}
+.lead-card .lc-urgent{font-family:var(--sub);font-weight:700;font-size:14px;color:var(--red);margin-top:10px}
+.lead-card .lc-urgent a{text-decoration:underline}
+.lead-card .lc-sub{font-family:var(--sub);color:var(--gray);margin-top:4px;font-size:14px}
+.lead-form{margin-top:20px;display:flex;flex-direction:column;gap:12px}
+.lead-form .row{display:flex;gap:12px}
+.lead-form input,.lead-form select,.lead-form textarea{
+  width:100%;font-family:var(--sub);font-size:16px;color:var(--ink);
+  padding:13px 15px;border:1.5px solid var(--line);border-radius:4px;background:#fff;transition:border-color .2s ease}
+.lead-form input:focus,.lead-form select:focus,.lead-form textarea:focus{outline:none;border-color:var(--navy)}
+.lead-form textarea{resize:vertical}
+.lead-form button{width:100%;margin-top:4px}
+.lead-form.hide{display:none}
+.lead-card .lc-fine{font-family:var(--sub);font-size:12px;color:var(--gray);margin-top:12px;line-height:1.5}
+.lead-card .lc-success{display:none;font-family:var(--sub);color:var(--navy);padding:18px 0}
+.lead-card .lc-success b{font-family:var(--head);display:block;font-size:1.3rem;margin-bottom:6px}
+.lead-card .lc-success.show{display:block}
+@media(max-width:600px){.lead-form .row{flex-direction:column}.lead-card{padding:var(--space-4)}}
+
+/* ---------- trust strip: scrolling marquee under the hero ---------- */
+.lp-trust{background:var(--red);overflow:hidden;padding:15px 0}
+.lp-trust .track{display:flex;width:max-content;animation:lp-marquee 38s linear infinite}
+.lp-trust span{font-family:var(--sub);font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#fff;
+  white-space:nowrap;padding:0 26px;display:inline-flex;align-items:center;gap:26px}
+.lp-trust span::after{content:"";width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55)}
+@keyframes lp-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- problem cards ---------- */
+.lp .section{padding:128px 0}
+@media(max-width:760px){.lp .section{padding:var(--space-7) 0}}
+.lp-problems{margin-top:var(--space-6);display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.lp-problem{background:var(--paper);padding:34px 30px;display:flex;flex-direction:column;gap:12px;transition:background-color .25s ease}
+.lp-problem:hover{background:#fff}
+.lp-problem .num{font-family:var(--head);font-size:14px;color:var(--gray)}
+.lp-problem h3{font-size:1.35rem;color:var(--navy)}
+.lp-problem p{font-family:var(--sub);font-size:15px;color:rgba(8,27,60,.66);flex:1}
+.lp-problem a{font-family:var(--sub);font-weight:700;font-size:14.5px;color:var(--red);margin-top:6px}
+.lp-problem a:hover{text-decoration:underline}
+@media(max-width:900px){.lp-problems{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.lp-problems{grid-template-columns:1fr}.lp-problem{padding:26px 22px}}
+
+/* ---------- offer band ---------- */
+.lp-offer{background:var(--navy)}
+.lp-offer .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--space-7);align-items:center}
+.lp-offer h2{color:#fff}
+.lp-offer h2 em{font-style:normal;color:var(--red)}
+.lp-offer .eyebrow{color:#fff}
+.lp-offer .lead{color:rgba(255,255,255,.8)}
+.lp-offer .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.lp-prices{border-top:1px solid var(--line-on-navy)}
+.lp-prices div{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid var(--line-on-navy)}
+.lp-prices span{font-family:var(--sub);font-size:16px;color:rgba(255,255,255,.85)}
+.lp-prices small{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:2px}
+.lp-prices b{font-family:var(--head);font-size:clamp(1.6rem,2.6vw,2.2rem);color:#fff;flex:none}
+@media(max-width:860px){.lp-offer .wrap{grid-template-columns:1fr}}
+
+/* ---------- why choose ---------- */
+.lp-why{margin-top:var(--space-6);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6) var(--space-5)}
+.lp-why div{border-top:2px solid var(--navy);padding-top:22px}
+.lp-why b{font-family:var(--head);font-size:14px;color:var(--red)}
+.lp-why h3{font-size:1.25rem;margin-top:10px}
+.lp-why p{font-family:var(--sub);font-size:15px;color:rgba(8,27,60,.66);margin-top:10px}
+@media(max-width:900px){.lp-why{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.lp-why{grid-template-columns:1fr;gap:var(--space-5)}}
+
+/* ---------- service area ---------- */
+.lp-cities{margin-top:var(--space-5);display:flex;flex-wrap:wrap;gap:10px}
+.lp-cities span{font-family:var(--sub);font-weight:700;font-size:14.5px;color:var(--navy);background:var(--paper);
+  border:1px solid var(--line);border-radius:100px;padding:10px 18px}
+.lp-cities span.home{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* ---------- more services ---------- */
+.lp-more{margin-top:var(--space-5);border-top:1px solid var(--line)}
+.lp-more a{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid var(--line);
+  font-family:var(--head);font-size:clamp(1.15rem,2vw,1.6rem);color:var(--navy);transition:padding-left .3s var(--ease),color .25s ease}
+.lp-more a span{font-family:var(--sub);font-size:20px;color:var(--gray)}
+.lp-more a:hover{padding-left:12px;color:var(--red)}
+.lp-more a:hover span{color:var(--red)}
+
+/* ---------- final CTA ---------- */
+.lp-final{background:var(--navy)}
+.lp-final .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--space-7);align-items:start}
+.lp-final h2,.lp-final .eyebrow{color:#fff}
+.lp-final .lead{color:rgba(255,255,255,.8)}
+@media(max-width:860px){.lp-final .wrap{grid-template-columns:1fr}}
+
+@media(prefers-reduced-motion:reduce){.lp-trust .track{animation:none}}
