@@ -176,6 +176,10 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
       if (res.ok) {
         form.classList.add('hide');
         success && success.classList.add('show');
+        // same GTM conversion event the landing pages send (see lp.js)
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'lead_form_submit', form_location: 'homepage', landing_page: 'homepage',
+          service: (form.querySelector('[name="service"]') || {}).value || '' });
       } else {
         submitBtn.disabled = false;
         alert("Something went wrong sending that — please call (747) 370-5601 instead.");

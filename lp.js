@@ -72,6 +72,15 @@
         if (!res.ok) throw new Error(res.status);
         form.classList.add('hide');
         success && success.classList.add('show');
+        // the page never reloads on submit, so GTM's form/thank-you-page
+        // triggers can't see the lead -- hand it a custom event instead
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'lead_form_submit',
+          form_location: form.dataset.location || '',
+          landing_page: (form.querySelector('[name="landing_page"]') || {}).value || '',
+          service: (form.querySelector('[name="service"]') || {}).value || '',
+        });
       } catch {
         submitBtn.disabled = false;
         alert('Something went wrong sending that — please call (747) 370-5601 instead.');
