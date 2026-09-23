@@ -53,9 +53,38 @@
   });
 })();
 
-// lead forms: submit via fetch and swap in an inline confirmation instead
-// of navigating away to Formspree's own page
+// lead forms: post the lead to the GoHighLevel inbound webhook (form.action)
+// as JSON and swap in an inline confirmation -- the page never navigates away.
+// The payload keeps GHL-friendly contact keys (first_name, last_name, phone,
+// email, postal_code) plus source/attribution fields for the workflow to map.
 (function () {
+  const buildLead = (form) => {
+    const d = Object.fromEntries(new FormData(form));
+    const name = (d.name || '').trim();
+    const [first, ...rest] = name.split(/\s+/);
+    return {
+      first_name: first || '',
+      last_name: rest.join(' '),
+      full_name: name,
+      phone: (d.phone || '').trim(),
+      email: (d.email || '').trim(),
+      postal_code: (d.zip || '').trim(),
+      service: d.service || '',
+      message: (d.message || '').trim(),
+      landing_page: d.landing_page || '',
+      form_location: d.form_location || form.dataset.location || '',
+      page_url: location.origin + location.pathname,
+      gclid: d.gclid || '',
+      utm_source: d.utm_source || '',
+      utm_medium: d.utm_medium || '',
+      utm_campaign: d.utm_campaign || '',
+      utm_term: d.utm_term || '',
+      utm_content: d.utm_content || '',
+      lead_source: 'Website - Landing Page',
+      submitted_at: new Date().toISOString(),
+    };
+  };
+
   document.querySelectorAll('.lead-form').forEach((form) => {
     const card = form.closest('.lead-card');
     const success = card && card.querySelector('.lc-success');
@@ -63,11 +92,12 @@
       e.preventDefault();
       const submitBtn = form.querySelector('button[type="submit"]');
       submitBtn.disabled = true;
+      const lead = buildLead(form);
       try {
         const res = await fetch(form.action, {
           method: 'POST',
-          body: new FormData(form),
-          headers: { Accept: 'application/json' },
+          body: JSON.stringify(lead),
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         });
         if (!res.ok) throw new Error(res.status);
         form.classList.add('hide');
@@ -77,9 +107,9 @@
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           event: 'lead_form_submit',
-          form_location: form.dataset.location || '',
-          landing_page: (form.querySelector('[name="landing_page"]') || {}).value || '',
-          service: (form.querySelector('[name="service"]') || {}).value || '',
+          form_location: lead.form_location,
+          landing_page: lead.landing_page,
+          service: lead.service,
         });
       } catch {
         submitBtn.disabled = false;

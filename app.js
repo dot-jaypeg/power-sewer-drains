@@ -157,8 +157,9 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
   addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 })();
 
-// contact form: submit via fetch so a successful send shows an inline
-// message instead of navigating away to Formspree's own confirmation page
+// contact form: post the lead to the GoHighLevel inbound webhook (form.action)
+// as JSON -- same payload shape the landing pages send (see lp.js) -- and show
+// an inline confirmation instead of navigating away
 (function () {
   const form = document.getElementById('contact-form');
   const success = document.getElementById('fc-success');
@@ -167,23 +168,41 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     e.preventDefault();
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
+    const d = Object.fromEntries(new FormData(form));
+    const params = new URLSearchParams(location.search);
+    const lead = {
+      first_name: (d.first_name || '').trim(),
+      last_name: (d.last_name || '').trim(),
+      full_name: [d.first_name, d.last_name].map(v => (v || '').trim()).filter(Boolean).join(' '),
+      phone: (d.phone || '').trim(),
+      email: (d.email || '').trim(),
+      city: (d.city || '').trim(),
+      service: d.service || '',
+      message: (d.message || '').trim(),
+      landing_page: 'homepage',
+      form_location: 'contact',
+      page_url: location.origin + location.pathname,
+      gclid: params.get('gclid') || '',
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      utm_term: params.get('utm_term') || '',
+      utm_content: params.get('utm_content') || '',
+      lead_source: 'Website - Homepage',
+      submitted_at: new Date().toISOString(),
+    };
     try {
       const res = await fetch(form.action, {
         method: 'POST',
-        body: new FormData(form),
-        headers: { Accept: 'application/json' },
+        body: JSON.stringify(lead),
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       });
-      if (res.ok) {
-        form.classList.add('hide');
-        success && success.classList.add('show');
-        // same GTM conversion event the landing pages send (see lp.js)
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: 'lead_form_submit', form_location: 'homepage', landing_page: 'homepage',
-          service: (form.querySelector('[name="service"]') || {}).value || '' });
-      } else {
-        submitBtn.disabled = false;
-        alert("Something went wrong sending that — please call (747) 370-5601 instead.");
-      }
+      if (!res.ok) throw new Error(res.status);
+      form.classList.add('hide');
+      success && success.classList.add('show');
+      // same GTM conversion event the landing pages send (see lp.js)
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'lead_form_submit', form_location: 'contact', landing_page: 'homepage', service: lead.service });
     } catch {
       submitBtn.disabled = false;
       alert("Something went wrong sending that — please call (747) 370-5601 instead.");
