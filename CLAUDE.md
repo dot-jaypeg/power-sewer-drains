@@ -1,6 +1,6 @@
 # Pro Sewer and Drains — Project Notes
 
-Site build for ACR Trenchless & Plumbing, dba Pro Sewer and Drains (prosewerdrains.com). See `references/onboarding-info/` for the full client brief (services, pricing, service area, brand contacts). Reference site for page structure: `capri-plumbing/` elsewhere in this repo — same pattern, swapped for this client's plumbing/drain-sewer services instead of HVAC.
+Site build for ACR Trenchless & Plumbing, dba Pro Sewer and Drains (prosewerdrain.com — note: the onboarding doc says "prosewerdrains.com", which is not registered). See `references/onboarding-info/` for the full client brief (services, pricing, service area, brand contacts). Reference site for page structure: `capri-plumbing/` elsewhere in this repo — same pattern, swapped for this client's plumbing/drain-sewer services instead of HVAC.
 
 ## Git workflow — standing authorization
 

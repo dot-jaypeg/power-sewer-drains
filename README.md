@@ -1,6 +1,6 @@
 # Pro Sewer and Drains
 
-Marketing site for ACR Trenchless & Plumbing, dba **Pro Sewer and Drains** (prosewerdrains.com) — a drain/sewer-focused plumbing company serving a 30-mile radius around La Habra, CA.
+Marketing site for ACR Trenchless & Plumbing, dba **Pro Sewer and Drains** (prosewerdrain.com — note: the onboarding doc says "prosewerdrains.com", which is not registered) — a drain/sewer-focused plumbing company serving a 30-mile radius around La Habra, CA.
 
 ## Status
 
@@ -20,3 +20,9 @@ Homepage built: pure HTML/CSS/JS, no build step. Google Ads landing pages built 
 ## Design
 
 Bold, near-monochrome direction (navy + off-white, logo red as the single accent) modeled on span.io / joulevc.com rather than a typical trade-site layout — oversized typography carries the page instead of icon grids, and the hero/process sections use trimmed clips from the client's own raw video instead of stock photography. Structural page pattern (nav, hero, contact form, footer) follows `capri-plumbing` elsewhere in the AM SITES workspace, adapted for this client's core services (clogged drains, water heaters, liners, pipe bursting, epoxy, boring, sewer repair) in place of Capri's HVAC line.
+
+## Deploy
+
+- Repo: `dot-jaypeg/power-sewer-drains` (`main` auto-deploys on Railway, project `pro-sewer-drains`, AM Production)
+- Railway URL: https://power-sewer-drains-production.up.railway.app (port 8080)
+- Custom domain: `www.prosewerdrain.com` → CNAME `srspphvx.up.railway.app` (GoDaddy DNS); the bare `prosewerdrain.com` 301-forwards to `https://www.prosewerdrain.com` at GoDaddy, same pattern as New Generation
