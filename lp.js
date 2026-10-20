@@ -113,7 +113,9 @@
         });
       } catch {
         submitBtn.disabled = false;
-        alert('Something went wrong sending that — please call (747) 370-5601 instead.');
+        // pages carry different tracking numbers, so use this page's own
+        var phone = document.querySelector('.nav-phone .num');
+        alert('Something went wrong sending that — please call ' + (phone ? phone.textContent : '(747) 370-5601') + ' instead.');
       }
     });
   });
